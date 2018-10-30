@@ -1,0 +1,21 @@
+mport smbus import time import urllib2 
+myAPI = "YourAPI" myDelay = 15
+baseURL = 'https://api.thingspeak.com/update?api_key=%s' % myAPI
+bus = smbus.SMBus(1)
+bus.write_byte_data(0x53, 0x2C, 0x0A) bus.write_byte_data(0x53, 0x2D, 0x08) bus.write_byte_data(0x53, 0x31, 0x08)
+time.sleep(0.5)
+data0 = bus.read_byte_data(0x53, 0x32) data1 = bus.read_byte_data(0x53, 0x33) data2 = bus.read_byte_data(0x53, 0x34) data3 = bus.read_byte_data(0x53, 0x35) data4 = bus.read_byte_data(0x53, 0x36) data5 = bus.read_byte_data(0x53, 0x37) try:
+while True:
+xAccl = ((data1 & 0x03) * 256) + data0 if xAccl > 511 :
+xAccl -= 1024
+yAccl = ((data3 & 0x03) * 256) + data2 if yAccl > 511 :
+yAccl -= 1024
+zAccl = ((data5 & 0x03) * 256) + data4 if zAccl > 511 :
+zAccl -= 1024
+print "Acceleration in X-Axis : %d" %xAccl print "Acceleration in Y-Axis : %d" %yAccl print "Acceleration in Z-Axis : %d" %zAccl
+f = urllib2.urlopen(baseURL + "&field2=%s" % int(xAccl))
+print f.read()
+f.close()
+except KeyboardInterrupt:
+pass
+✝                                                                                                                                                                             
