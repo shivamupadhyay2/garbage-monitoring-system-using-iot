@@ -1,1 +1,0 @@
-# garbage-monitoring-system-using-iot
