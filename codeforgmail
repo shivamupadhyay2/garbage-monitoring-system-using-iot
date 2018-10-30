@@ -10,8 +10,8 @@ GPIO.setmode(GPIO.BCM)
 TRIG = 23
 ECHO = 24
 print "Distance measurement in progress" GPIO.setup(TRIG,GPIO.OUT)
-fromaddr= "sendersid@domain.com"
-toaddr= "receipentid@domain.com"
+fromaddr= "shivam.mahawan@gmail.com"
+toaddr= "gauravrai15011998@gmail.com"
 msg=MIMEMultipart()
 msg['From']=fromaddr msg['to']=toaddr 
 msg['subject']='garbage level'
